@@ -9,14 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #080a0f;
-      --surface: #111522;
+      --bg: #07090e;
+      --surface: #101420;
       --surface-border: rgba(255, 255, 255, 0.08);
       --accent: #6366f1;
       --accent-grad: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
       --text: #f8fafc;
       --muted: #94a3b8;
       --danger: #ef4444;
+      --success: #10b981;
       --radius: 12px;
     }
 
@@ -65,7 +66,6 @@
       gap: 10px;
     }
 
-    /* أزرار SVG فقط بدون نصوص */
     .icon-btn {
       width: 40px;
       height: 40px;
@@ -104,7 +104,7 @@
       transform: none;
     }
 
-    /* مساحة العرض والمعاينة */
+    /* مساحة العرض */
     .viewport {
       flex: 1;
       position: relative;
@@ -115,7 +115,7 @@
       overflow: hidden;
     }
 
-    #videoSource {
+    #videoSource, #musicSource {
       display: none;
     }
 
@@ -144,7 +144,7 @@
       opacity: 0.35;
     }
 
-    /* شريط تحكم سريع بالعنصر المحدد */
+    /* شريط تحكم سريع بالعنصر */
     .floating-bar {
       position: absolute;
       top: 12px;
@@ -228,7 +228,7 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* القائمة السفلية (أيقونات فقط بدون نصوص) */
+    /* القائمة السفلية (أيقونات فقط وبدون نصوص) */
     .bottom-section {
       background: var(--surface);
       border-top: 1px solid var(--surface-border);
@@ -249,7 +249,7 @@
 
     .dock-tab {
       flex: 1;
-      min-width: 54px;
+      min-width: 50px;
       padding: 12px 0;
       background: none;
       border: none;
@@ -263,8 +263,8 @@
     }
 
     .dock-tab svg {
-      width: 22px;
-      height: 22px;
+      width: 21px;
+      height: 21px;
       fill: currentColor;
     }
 
@@ -276,7 +276,7 @@
 
     .dock-content {
       display: none;
-      max-height: 220px;
+      max-height: 240px;
       overflow-y: auto;
       padding: 12px 16px;
       border-top: 1px solid var(--surface-border);
@@ -326,7 +326,7 @@
       object-fit: contain;
     }
 
-    /* لوحة الألوان المباشرة للنصوص */
+    /* باليت ألوان النصوص */
     .color-palette {
       display: flex;
       align-items: center;
@@ -369,7 +369,70 @@
       cursor: pointer;
     }
 
-    /* شريط القص الاحترافي (Pro Timeline Trimmer) */
+    /* واجهة الميكسر الصوتي المتطور */
+    .audio-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--surface-border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toggles-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .toggle-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--surface-border);
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .toggle-chip.muted {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: var(--danger);
+      color: #fca5a5;
+    }
+
+    .presets-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .preset-btn {
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .preset-btn:active {
+      transform: scale(0.95);
+      background: var(--accent);
+    }
+
+    /* القص الاحترافي */
     .trim-box {
       display: flex;
       flex-direction: column;
@@ -400,7 +463,6 @@
       align-items: center;
     }
 
-    /* خطوط تشبه فيلم السينما داخل شريط القص */
     .trim-strip-bg {
       position: absolute;
       inset: 0;
@@ -494,12 +556,12 @@
       font-size: 0.8rem;
     }
 
-    /* شاشة الحفظ مع الترحيب وزر إلغاء الحفظ */
+    /* نافذة الحفظ مع رسالة الترحيب وزر الإلغاء */
     .export-box {
       position: absolute;
       inset: 0;
-      background: rgba(8, 10, 15, 0.98);
-      backdrop-filter: blur(12px);
+      background: rgba(7, 9, 14, 0.98);
+      backdrop-filter: blur(14px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -556,7 +618,6 @@
       transition: width 0.05s linear;
     }
 
-    /* زر إلغاء الحفظ */
     .btn-cancel-export {
       margin-top: 24px;
       background: rgba(239, 68, 68, 0.12);
@@ -582,19 +643,22 @@
 </head>
 <body>
 
-  <!-- الشريط العلوي (العنوان + أيقونات SVG فقط) -->
+  <!-- الصوت والموسيقى الخفية -->
+  <audio id="musicSource" loop></audio>
+
+  <!-- الشريط العلوي -->
   <header>
     <div class="brand">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#6366f1"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>EZIDISTUDIO
     </div>
     <div class="header-actions">
-      <!-- زر رفع فيديو (SVG فقط) -->
+      <!-- رفع فيديو -->
       <label class="icon-btn" title="رفع فيديو">
         <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
         <input type="file" id="videoUploader" accept="video/*" style="display: none;">
       </label>
 
-      <!-- زر حفظ فيديو (SVG فقط) -->
+      <!-- حفظ فيديو 720p HD -->
       <button class="icon-btn icon-btn-export" id="btnExport" title="حفظ الفيديو بدقة HD" disabled>
         <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
       </button>
@@ -629,9 +693,12 @@
     <span class="time-badge" id="timeCounter">00:00 / 00:00</span>
   </div>
 
-  <!-- الدرج السفلي (أيقونات SVG فقط وبدون نصوص مع ميزة Toggle) -->
+  <!-- الدرج السفلي (أيقونات فقط وبدون نصوص مع ميزة Toggle) -->
   <div class="bottom-section">
     <nav class="dock-tabs">
+      <button class="dock-tab" data-target="panel-audio" title="الموسيقى والميكسر">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+      </button>
       <button class="dock-tab" data-target="panel-stickers" title="ملصقات">
         <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
       </button>
@@ -653,6 +720,60 @@
     </nav>
 
     <div class="dock-content" id="dockContent">
+      <!-- لوحة الموسيقى والميكسر المتطور الجديد -->
+      <div class="panel" id="panel-audio">
+        <label class="icon-btn" style="width:100%; border-radius: var(--radius); height: 42px; background: rgba(99,102,241,0.12); border-color: var(--accent); gap: 8px;">
+          <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          <span id="musicFileLabel" style="font-size:0.78rem; font-weight:700;">+ إضافة ملف موسيقى (MP3 / WAV)</span>
+          <input type="file" id="musicUploader" accept="audio/*" style="display: none;">
+        </label>
+
+        <div class="audio-card">
+          <!-- أزرار كتم الأصوات المستقلة -->
+          <div class="toggles-row">
+            <button class="toggle-chip" id="btnToggleVideoMute">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+              <span id="videoMuteText">كتم صوت الفيديو</span>
+            </button>
+            <button class="toggle-chip" id="btnToggleMusicMute">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4.27 4.27L20 18.73 4.27 3zM14 7h4V3h-6v5.18l2 2V7z"/></svg>
+              <span id="musicMuteText">كتم الموسيقى</span>
+            </button>
+          </div>
+
+          <!-- موازنة سريعة بضغطة زر -->
+          <div class="field-row">
+            <label>موازنة سريعة متطورة:</label>
+            <div class="presets-row">
+              <button class="preset-btn" id="presetMusicHigh">🎵 الموسيقى أعلى</button>
+              <button class="preset-btn" id="presetVideoHigh">🗣️ الفيديو أعلى</button>
+              <button class="preset-btn" id="presetBalanced">⚖️ توازن متناسق</button>
+            </div>
+          </div>
+
+          <!-- شريط صوت الفيديو -->
+          <div class="field-row">
+            <label>مستوى صوت الفيديو الأصلي: <span id="videoVolVal">100%</span></label>
+            <input type="range" id="videoVolSlider" min="0" max="150" value="100">
+          </div>
+
+          <!-- شريط صوت الموسيقى المضافة -->
+          <div class="field-row">
+            <label>مستوى صوت الموسيقى المضافة: <span id="musicVolVal">80%</span></label>
+            <input type="range" id="musicVolSlider" min="0" max="150" value="80">
+          </div>
+        </div>
+
+        <!-- تفعيل أو إلغاء اللوجو المتحرك -->
+        <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); border:1px solid var(--surface-border); padding:8px 12px; border-radius:10px;">
+          <span style="font-size:0.75rem; font-weight:700;">اللوجو المائي المتحرك (أسفل اليسار):</span>
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="chkWatermark" checked style="accent-color:var(--accent); width:16px; height:16px;">
+            <span style="font-size:0.75rem; color:var(--text);">مفعل</span>
+          </label>
+        </div>
+      </div>
+
       <!-- لوحة الملصقات -->
       <div class="panel" id="panel-stickers">
         <div class="stickers-grid" id="stickersContainer"></div>
@@ -671,7 +792,7 @@
         </label>
       </div>
 
-      <!-- لوحة النصوص مع باليت ألوان مدمجة ومباشرة -->
+      <!-- لوحة النصوص -->
       <div class="panel" id="panel-text">
         <button class="icon-btn-export" id="btnAddText" style="width: 100%; height: 38px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
           + إضافة نص جديد
@@ -680,7 +801,6 @@
           <input type="text" id="textStringInput" placeholder="اكتب النص هنا..." value="نص الفيديو">
         </div>
 
-        <!-- اختيار لون النص مباشرة في القائمة -->
         <div class="field-row">
           <label>اختر لون النص مباشرة:</label>
           <div class="color-palette">
@@ -692,7 +812,6 @@
             <div class="color-swatch" data-color="#a855f7" style="background: #a855f7;"></div>
             <div class="color-swatch" data-color="#f97316" style="background: #f97316;"></div>
             <div class="color-swatch" data-color="#000000" style="background: #000000;"></div>
-            <!-- مخصص -->
             <div class="color-swatch color-swatch-custom" title="لون مخصص">
               <input type="color" id="customColorPicker" value="#ffffff">
             </div>
@@ -728,7 +847,7 @@
         </div>
       </div>
 
-      <!-- لوحة القص الاحترافي (Pro Trimmer) -->
+      <!-- لوحة القص الاحترافي -->
       <div class="panel" id="panel-trim">
         <div class="trim-box">
           <div class="trim-stats">
@@ -737,7 +856,6 @@
             <span>النهاية: <b id="proTrimEndLbl">00:00.0</b></span>
           </div>
 
-          <!-- شريط القص المزدوج الذكي -->
           <div class="trim-track-wrap" id="trimTrackWrap">
             <div class="trim-strip-bg"></div>
             <div class="trim-highlight" id="trimHighlight"></div>
@@ -762,19 +880,18 @@
     </div>
   </div>
 
-  <!-- شاشة الحفظ مع زر إلغاء الحفظ ورسالة الترحيب -->
+  <!-- شاشة الحفظ 720p HD -->
   <div class="export-box" id="exportModal">
     <div class="welcome-title">مرحبا بكم في استوديو ايزيدي مونتاج</div>
     <div class="spinner"></div>
-    <p style="font-size: 0.85rem; font-weight: 700;">جاري الحفظ والمعالجة بدقة 720p HD</p>
-    <p style="font-size: 0.72rem; color: var(--muted); margin-top: 3px;">معالجة فائقة السرعة بدون أي تأخير...</p>
+    <p style="font-size: 0.85rem; font-weight: 700;">جاري الحفظ والمعالجة السريعة بدقة 720p HD</p>
+    <p style="font-size: 0.72rem; color: var(--muted); margin-top: 3px;">دمج المسارات الصوتية واللوجو بدقة عالية...</p>
     
     <div class="progress-track">
       <div class="progress-fill" id="exportProgressBar"></div>
     </div>
     <span id="exportProgressPct" style="font-size: 0.85rem; font-weight: 800; margin-top: 8px;">0%</span>
 
-    <!-- زر إلغاء الحفظ -->
     <button class="btn-cancel-export" id="btnCancelExport">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
       إلغاء عملية الحفظ
@@ -793,7 +910,7 @@
       { name: "thunder", svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="55,2 20,55 50,55 40,98 80,45 50,45" fill="#38bdf8" stroke="#0284c7" stroke-width="3"/></svg>` },
       { name: "hundred", svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50" y="65" font-size="45" font-weight="900" font-family="Arial" fill="#ef4444" text-anchor="middle">100</text><line x1="15" y1="78" x2="85" y2="78" stroke="#ef4444" stroke-width="6"/></svg>` },
       { name: "target", svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#ef4444"/><circle cx="50" cy="50" r="33" fill="#ffffff"/><circle cx="50" cy="50" r="22" fill="#ef4444"/><circle cx="50" cy="50" r="10" fill="#ffffff"/></svg>` },
-      { name: "sunglasses", svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M15 40 Q25 35 45 40 L43 55 Q30 65 15 55 Z" fill="#0f172a"/><path d="M55 40 Q75 35 85 40 L85 55 Q70 65 55 55 Z" fill="#0f172a"/><rect x="44" y="42" width="12" height="5" fill="#0f172a"/></svg>` },
+      { name: "sunglasses", svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M15 40 Q25 35 45 40 L43 55 Q30 65 15 55 Z" fill="#0f172a"/><path d="M55 40 Q75 35 85 40 L85 55 Q70 65 55 55 Z" fill="#0f172a"/></svg>` },
       { name: "check", svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#10b981"/><path d="M30 52 L44 66 L72 36" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>` }
     ];
 
@@ -808,7 +925,7 @@
     });
 
     // ----------------------------------------------------
-    // 2. إدارة التبويبات (فتح/إغلاق بالضغط على الأيقونة نفسها)
+    // 2. إدارة التبويبات (فتح/إغلاق بالضغط على الأيقونة)
     // ----------------------------------------------------
     const dockContent = document.getElementById('dockContent');
     const tabs = document.querySelectorAll('.dock-tab');
@@ -837,6 +954,7 @@
     // 3. المحرك والمعاينة الخفيفة
     // ----------------------------------------------------
     const video = document.getElementById('videoSource');
+    const music = document.getElementById('musicSource');
     const canvas = document.getElementById('studioCanvas');
     const ctx = canvas.getContext('2d', { alpha: false });
 
@@ -858,23 +976,187 @@
     let trimStart = 0;
     let trimEnd = 0;
 
+    // ----------------------------------------------------
+    // 4. الميكسر الصوتي المتطور (Audio Mixer Architecture)
+    // ----------------------------------------------------
     let audioCtx = null;
-    let audioSrcNode = null;
+    let videoGainNode = null;
+    let musicGainNode = null;
     let audioDestNode = null;
 
-    function initAudioRouting() {
+    let isVideoMuted = false;
+    let isMusicMuted = false;
+    let hasMusic = false;
+
+    function initAudioGraph() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        audioSrcNode = audioCtx.createMediaElementSource(video);
         audioDestNode = audioCtx.createMediaStreamDestination();
-        audioSrcNode.connect(audioDestNode);
-        audioSrcNode.connect(audioCtx.destination);
+
+        // 1. مسار صوت الفيديو
+        const videoSrc = audioCtx.createMediaElementSource(video);
+        videoGainNode = audioCtx.createGain();
+        videoSrc.connect(videoGainNode);
+        videoGainNode.connect(audioDestNode);
+        videoGainNode.connect(audioCtx.destination);
+
+        // 2. مسار صوت الموسيقى المضافة
+        const musicSrc = audioCtx.createMediaElementSource(music);
+        musicGainNode = audioCtx.createGain();
+        musicSrc.connect(musicGainNode);
+        musicGainNode.connect(audioDestNode);
+        musicGainNode.connect(audioCtx.destination);
+
+        updateAudioVolumes();
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
     }
 
+    function updateAudioVolumes() {
+      if (!videoGainNode || !musicGainNode) return;
+
+      const vVol = parseFloat(document.getElementById('videoVolSlider').value) / 100;
+      const mVol = parseFloat(document.getElementById('musicVolSlider').value) / 100;
+
+      videoGainNode.gain.value = isVideoMuted ? 0 : vVol;
+      musicGainNode.gain.value = (!hasMusic || isMusicMuted) ? 0 : mVol;
+
+      document.getElementById('videoVolVal').innerText = Math.round(vVol * 100) + '%';
+      document.getElementById('musicVolVal').innerText = Math.round(mVol * 100) + '%';
+    }
+
+    // رفع ملف الموسيقى
+    document.getElementById('musicUploader').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      music.src = URL.createObjectURL(file);
+      music.load();
+      hasMusic = true;
+
+      document.getElementById('musicFileLabel').innerText = `تمت إضافة: ${file.name.substring(0, 20)}...`;
+      initAudioGraph();
+      updateAudioVolumes();
+    });
+
+    // كتم صوت الفيديو
+    document.getElementById('btnToggleVideoMute').addEventListener('click', () => {
+      isVideoMuted = !isVideoMuted;
+      const btn = document.getElementById('btnToggleVideoMute');
+      btn.classList.toggle('muted', isVideoMuted);
+      document.getElementById('videoMuteText').innerText = isVideoMuted ? 'إلغاء كتم الفيديو' : 'كتم صوت الفيديو';
+      updateAudioVolumes();
+    });
+
+    // كتم الموسيقى المضافة
+    document.getElementById('btnToggleMusicMute').addEventListener('click', () => {
+      isMusicMuted = !isMusicMuted;
+      const btn = document.getElementById('btnToggleMusicMute');
+      btn.classList.toggle('muted', isMusicMuted);
+      document.getElementById('musicMuteText').innerText = isMusicMuted ? 'إلغاء كتم الموسيقى' : 'كتم الموسيقى';
+      updateAudioVolumes();
+    });
+
+    // التحكم اليدوي بمستوى الصوت
+    document.getElementById('videoVolSlider').addEventListener('input', updateAudioVolumes);
+    document.getElementById('musicVolSlider').addEventListener('input', updateAudioVolumes);
+
+    // أزرار الموازنة السريعة
+    document.getElementById('presetMusicHigh').addEventListener('click', () => {
+      document.getElementById('musicVolSlider').value = 100;
+      document.getElementById('videoVolSlider').value = 25;
+      isVideoMuted = false;
+      isMusicMuted = false;
+      resetMuteButtons();
+      updateAudioVolumes();
+    });
+
+    document.getElementById('presetVideoHigh').addEventListener('click', () => {
+      document.getElementById('videoVolSlider').value = 100;
+      document.getElementById('musicVolSlider').value = 25;
+      isVideoMuted = false;
+      isMusicMuted = false;
+      resetMuteButtons();
+      updateAudioVolumes();
+    });
+
+    document.getElementById('presetBalanced').addEventListener('click', () => {
+      document.getElementById('videoVolSlider').value = 100;
+      document.getElementById('musicVolSlider').value = 65;
+      isVideoMuted = false;
+      isMusicMuted = false;
+      resetMuteButtons();
+      updateAudioVolumes();
+    });
+
+    function resetMuteButtons() {
+      document.getElementById('btnToggleVideoMute').classList.remove('muted');
+      document.getElementById('btnToggleMusicMute').classList.remove('muted');
+      document.getElementById('videoMuteText').innerText = 'كتم صوت الفيديو';
+      document.getElementById('musicMuteText').innerText = 'كتم الموسيقى';
+    }
+
+    // ----------------------------------------------------
+    // 5. اللوجو المائي المتحرك (Animated GIF/Badge Logo)
+    // ----------------------------------------------------
+    const chkWatermark = document.getElementById('chkWatermark');
+
+    function renderAnimatedWatermark(timestamp) {
+      if (!chkWatermark.checked) return;
+
+      const time = timestamp * 0.003;
+      const badgeH = Math.max(22, canvas.height * 0.045);
+      const badgeW = badgeH * 3.8;
+      const x = canvas.width * 0.025; // أسفل اليسار
+      const y = canvas.height - badgeH - (canvas.height * 0.025);
+
+      ctx.save();
+      // خلفية زجاجية معتمة
+      ctx.fillStyle = 'rgba(7, 10, 18, 0.75)';
+      ctx.strokeStyle = 'rgba(99, 102, 241, 0.55)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(x, y, badgeW, badgeH, badgeH / 2);
+      ctx.fill();
+      ctx.stroke();
+
+      // موجات صوتية متحركة ونبضية (Live Animated Waves)
+      const bars = 4;
+      const barW = Math.max(2, badgeH * 0.08);
+      const startBx = x + (badgeH * 0.35);
+
+      for (let i = 0; i < bars; i++) {
+        const wave = Math.sin(time * 3 + i * 1.2) * 0.5 + 0.5;
+        const bH = (badgeH * 0.25) + (wave * badgeH * 0.45);
+        const bY = y + (badgeH - bH) / 2;
+
+        ctx.fillStyle = (i % 2 === 0) ? '#6366f1' : '#ec4899';
+        ctx.fillRect(startBx + (i * (barW + 2)), bY, barW, bH);
+      }
+
+      // نص اللوجو
+      const fSize = Math.round(badgeH * 0.45);
+      ctx.font = `900 ${fSize}px 'Cairo', sans-serif`;
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('EZIDI STUDIO', startBx + (bars * (barW + 2)) + 6, y + badgeH / 2);
+
+      // نبض ضوئي متوهج
+      const pulse = Math.sin(time * 4) * 0.5 + 0.5;
+      ctx.fillStyle = `rgba(34, 197, 94, ${0.4 + pulse * 0.6})`;
+      ctx.beginPath();
+      ctx.arc(x + badgeW - (badgeH * 0.35), y + badgeH / 2, Math.max(2, badgeH * 0.1), 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    // ----------------------------------------------------
+    // 6. تهيئة الفيديو والمعاينة
+    // ----------------------------------------------------
     function setupPreviewDimensions() {
       const aspect = video.videoWidth / video.videoHeight;
       if (aspect >= 1) {
@@ -891,7 +1173,6 @@
       canvas.height = previewH;
     }
 
-    // رفع الفيديو
     document.getElementById('videoUploader').addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -907,7 +1188,6 @@
         trimEnd = video.duration;
         document.getElementById('scrubber').max = video.duration;
 
-        // إعداد أداة القص الاحترافية
         setupProTrimmer();
 
         document.getElementById('btnExport').disabled = false;
@@ -916,9 +1196,7 @@
       };
     });
 
-    // ----------------------------------------------------
-    // 4. نظام القص الاحترافي (Pro Timeline Trimmer)
-    // ----------------------------------------------------
+    // القص الاحترافي
     const proTrimStart = document.getElementById('proTrimStart');
     const proTrimEnd = document.getElementById('proTrimEnd');
     const trimHighlight = document.getElementById('trimHighlight');
@@ -958,6 +1236,7 @@
       }
       updateTrimmerVisuals();
       video.currentTime = trimStart;
+      syncMusic();
       render();
     });
 
@@ -967,6 +1246,7 @@
       }
       updateTrimmerVisuals();
       video.currentTime = trimEnd;
+      syncMusic();
       render();
     });
 
@@ -978,9 +1258,13 @@
       return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}.${ms}`;
     }
 
-    // ----------------------------------------------------
-    // 5. اختيار ألوان النصوص مباشرة في القائمة
-    // ----------------------------------------------------
+    function syncMusic() {
+      if (hasMusic && music.duration) {
+        music.currentTime = (video.currentTime - trimStart) % music.duration;
+      }
+    }
+
+    // ألوان النصوص المباشرة
     document.querySelectorAll('.color-swatch:not(.color-swatch-custom)').forEach(swatch => {
       swatch.addEventListener('click', () => {
         document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
@@ -1101,7 +1385,7 @@
     });
 
     // ----------------------------------------------------
-    // 6. رسم المشهد والفلاتر
+    // 7. محرك الرسم المدمج (Render Engine)
     // ----------------------------------------------------
     function getFilterString() {
       let f = `brightness(${manualAdjust.bright}%) contrast(${manualAdjust.contrast}%)`;
@@ -1113,14 +1397,16 @@
       return f;
     }
 
-    function render(isExportFrame = false) {
+    function render(isExportFrame = false, timestamp = performance.now()) {
       if (!video.videoWidth) return;
 
+      // رسم الفيديو مع الفلتر
       ctx.save();
       ctx.filter = getFilterString();
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       ctx.restore();
 
+      // رسم الطبقات
       layers.forEach(layer => {
         const rx = layer.x * canvas.width;
         const ry = layer.y * canvas.height;
@@ -1169,13 +1455,19 @@
         ctx.restore();
       });
 
+      // رسم اللوجو المائي المتحرك أسفل اليسار
+      renderAnimatedWatermark(timestamp);
+
       if (!isExporting) {
-        if (video.currentTime >= trimEnd) video.currentTime = trimStart;
+        if (video.currentTime >= trimEnd) {
+          video.currentTime = trimStart;
+          syncMusic();
+        }
         document.getElementById('scrubber').value = video.currentTime;
         document.getElementById('timeCounter').innerText = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
 
         if (!video.paused && !video.ended) {
-          requestAnimationFrame(() => render(false));
+          requestAnimationFrame((t) => render(false, t));
         }
       }
     }
@@ -1256,20 +1548,24 @@
     const playBtn = document.getElementById('btnPlayPause');
     const playSvg = document.getElementById('playSvg');
     playBtn.addEventListener('click', () => {
-      initAudioRouting();
+      initAudioGraph();
       if (video.paused) {
         if (video.currentTime >= trimEnd) video.currentTime = trimStart;
+        syncMusic();
         video.play();
+        if (hasMusic && !isMusicMuted) music.play();
         playSvg.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
         render();
       } else {
         video.pause();
+        if (hasMusic) music.pause();
         playSvg.innerHTML = '<path d="M8 5v14l11-7z"/>';
       }
     });
 
     document.getElementById('scrubber').addEventListener('input', e => {
       video.currentTime = e.target.value;
+      syncMusic();
       render();
     });
 
@@ -1281,7 +1577,7 @@
     }
 
     // ----------------------------------------------------
-    // 7. زر إلغاء الحفظ الفوري
+    // 8. زر إلغاء الحفظ
     // ----------------------------------------------------
     document.getElementById('btnCancelExport').addEventListener('click', () => {
       isExportCancelled = true;
@@ -1290,6 +1586,7 @@
         activeRecorder.stop();
       }
       video.pause();
+      if (hasMusic) music.pause();
       setupPreviewDimensions();
       document.getElementById('exportModal').classList.remove('show');
       video.currentTime = trimStart;
@@ -1297,7 +1594,7 @@
     });
 
     // ----------------------------------------------------
-    // 8. التصدير السريع بدقة 720p HD
+    // 9. التصدير السريع 720p HD ودمج الصوت المتطور
     // ----------------------------------------------------
     document.getElementById('btnExport').addEventListener('click', async () => {
       if (isExporting) return;
@@ -1305,15 +1602,17 @@
       isExportCancelled = false;
       selectLayer(null);
       video.pause();
+      if (hasMusic) music.pause();
 
-      initAudioRouting();
-      video.muted = false;
+      initAudioGraph();
+      updateAudioVolumes();
 
       const modal = document.getElementById('exportModal');
       const bar = document.getElementById('exportProgressBar');
       const pct = document.getElementById('exportProgressPct');
       modal.classList.add('show');
 
+      // تحديد أبعاد 720p HD
       const aspect = video.videoWidth / video.videoHeight;
       let expW, expH;
       if (aspect >= 1) {
@@ -1330,8 +1629,12 @@
       canvas.height = expH;
 
       video.currentTime = trimStart;
+      syncMusic();
 
+      // التقاط بث الكانفاس (25 FPS لسلاسة وسرعة فائقة)
       const stream = canvas.captureStream(25);
+
+      // دمج المسارات الصوتية (الفيديو + الموسيقى معاً)
       if (audioDestNode && audioDestNode.stream.getAudioTracks().length > 0) {
         stream.addTrack(audioDestNode.stream.getAudioTracks()[0]);
       }
@@ -1355,7 +1658,6 @@
       recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
 
       recorder.onstop = () => {
-        // إذا تم إلغاء العملية، لا يتم حفظ أي ملف
         if (isExportCancelled) {
           isExportCancelled = false;
           return;
@@ -1378,11 +1680,12 @@
       };
 
       await video.play();
+      if (hasMusic && !isMusicMuted) await music.play();
       recorder.start();
 
-      function exportLoop() {
+      function exportLoop(t) {
         if (!isExporting || isExportCancelled) return;
-        render(true);
+        render(true, t);
 
         const currentProg = Math.min(100, ((video.currentTime - trimStart) / (trimEnd - trimStart)) * 100);
         bar.style.width = currentProg + '%';
@@ -1390,6 +1693,7 @@
 
         if (video.currentTime >= trimEnd || video.ended) {
           video.pause();
+          if (hasMusic) music.pause();
           recorder.stop();
         } else {
           requestAnimationFrame(exportLoop);
